@@ -1,34 +1,50 @@
 import tkinter as tk
-from tkinter import messagebox
+from tkinter import messagebox, font
 
 class CaixaRegistradora:
     def __init__(self, root):
         self.root = root
         self.root.title("Caixa Registradora - Supermercado")
+
+        # Tela cheia
+        self.root.attributes('-fullscreen', True)
+        self.root.configure(bg="gray")
+
         self.itens = []
 
-        tk.Label(root, text="Nome do produto:").grid(row=0, column=0)
-        self.nome_entry = tk.Entry(root)
-        self.nome_entry.grid(row=0, column=1)
+        # Fonte de alto contraste
+        self.fonte = ("Arial", 16, "bold")
+        self.fg_color = "white"
+        self.bg_color = "gray"
 
-        tk.Label(root, text="Preço (R$):").grid(row=1, column=0)
-        self.preco_entry = tk.Entry(root)
-        self.preco_entry.grid(row=1, column=1)
+        # Nome do produto
+        tk.Label(root, text="Nome do produto:", font=self.fonte, fg=self.fg_color, bg=self.bg_color).grid(row=0, column=0, sticky="e", padx=10, pady=10)
+        self.nome_entry = tk.Entry(root, font=self.fonte)
+        self.nome_entry.grid(row=0, column=1, padx=10, pady=10)
 
-    
-        self.add_button = tk.Button(root, text="Adicionar item", command=self.adicionar_item)
-        self.add_button.grid(row=2, column=0, columnspan=2, pady=5)
+        # Preço do produto
+        tk.Label(root, text="Preço (R$):", font=self.fonte, fg=self.fg_color, bg=self.bg_color).grid(row=1, column=0, sticky="e", padx=10, pady=10)
+        self.preco_entry = tk.Entry(root, font=self.fonte)
+        self.preco_entry.grid(row=1, column=1, padx=10, pady=10)
 
-     
-        self.lista_box = tk.Listbox(root, width=40)
-        self.lista_box.grid(row=3, column=0, columnspan=2, padx=10, pady=5)
+        # Botão de adicionar
+        self.add_button = tk.Button(root, text="Adicionar item", font=self.fonte, command=self.adicionar_item, bg="darkgreen", fg="white")
+        self.add_button.grid(row=2, column=0, columnspan=2, pady=10)
 
-      
-        self.total_label = tk.Label(root, text="Total: R$ 0.00")
-        self.total_label.grid(row=4, column=0, columnspan=2)
+        # Lista de produtos
+        self.lista_box = tk.Listbox(root, width=80, height=20, font=self.fonte, bg="white", fg="black")
+        self.lista_box.grid(row=3, column=0, columnspan=2, padx=20, pady=10)
 
-        self.finalizar_button = tk.Button(root, text="Finalizar compra", command=self.finalizar_compra)
-        self.finalizar_button.grid(row=5, column=0, columnspan=2, pady=10)
+        # Total
+        self.total_label = tk.Label(root, text="Total: R$ 0.00", font=self.fonte, fg=self.fg_color, bg=self.bg_color)
+        self.total_label.grid(row=4, column=0, columnspan=2, pady=10)
+
+        # Botão finalizar compra
+        self.finalizar_button = tk.Button(root, text="Finalizar compra", font=self.fonte, command=self.finalizar_compra, bg="darkred", fg="white")
+        self.finalizar_button.grid(row=5, column=0, columnspan=2, pady=20)
+
+        # Tecla Esc para sair
+        self.root.bind("<Escape>", lambda e: self.root.destroy())
 
     def adicionar_item(self):
         nome = self.nome_entry.get()
@@ -59,7 +75,7 @@ class CaixaRegistradora:
         else:
             messagebox.showinfo("Nenhum item", "Nenhum item foi adicionado.")
 
-
+# Executar
 if __name__ == "__main__":
     root = tk.Tk()
     app = CaixaRegistradora(root)
