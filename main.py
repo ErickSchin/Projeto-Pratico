@@ -1,8 +1,8 @@
 import tkinter as tk
-from tkinter import messagebox, font
+from tkinter import messagebox
 
 class CaixaRegistradora:
-    def __init__(self, root):
+    def _init_(self, root):
         self.root = root
         self.root.title("Caixa Registradora - Supermercado")
 
@@ -18,17 +18,20 @@ class CaixaRegistradora:
         self.bg_color = "gray"
 
         # Nome do produto
-        tk.Label(root, text="Nome do produto:", font=self.fonte, fg=self.fg_color, bg=self.bg_color).grid(row=0, column=0, sticky="e", padx=10, pady=10)
+        tk.Label(root, text="Nome do produto:", font=self.fonte, fg=self.fg_color, bg=self.bg_color)\
+            .grid(row=0, column=0, sticky="e", padx=10, pady=10)
         self.nome_entry = tk.Entry(root, font=self.fonte)
         self.nome_entry.grid(row=0, column=1, padx=10, pady=10)
 
         # Preço do produto
-        tk.Label(root, text="Preço (R$):", font=self.fonte, fg=self.fg_color, bg=self.bg_color).grid(row=1, column=0, sticky="e", padx=10, pady=10)
+        tk.Label(root, text="Preço (R$):", font=self.fonte, fg=self.fg_color, bg=self.bg_color)\
+            .grid(row=1, column=0, sticky="e", padx=10, pady=10)
         self.preco_entry = tk.Entry(root, font=self.fonte)
         self.preco_entry.grid(row=1, column=1, padx=10, pady=10)
 
         # Quantidade do produto
-        tk.Label(root, text="Quantidade", font=self.fonte, fg=self.fg_color, bg=self.bg_color).grid(row=2, column=0, sticky="e", padx=10, pady=10)
+        tk.Label(root, text="Quantidade", font=self.fonte, fg=self.fg_color, bg=self.bg_color)\
+            .grid(row=2, column=0, sticky="e", padx=10, pady=10)
         self.qtd_entry = tk.Entry(root, font=self.fonte)
         self.qtd_entry.grid(row=2, column=1, padx=10, pady=10)
 
@@ -84,7 +87,7 @@ class CaixaRegistradora:
             messagebox.showinfo("Nenhum item", "Nenhum item foi adicionado.")
 
 # Executar
-if __name__ == "__main__":
+if __name__ == "_main_":
     root = tk.Tk()
     app = CaixaRegistradora(root)
     root.mainloop()
